@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Beer 101</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon1.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" >
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,600,600i,700,700i,900" rel="stylesheet">
+
+  <!-- d3 JavaScript -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3-tip/0.7.1/d3-tip.min.js"></script>
+  
+  <!-- Vendor CSS Files -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/animate.css/animate.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/aos/aos.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/boxicons/css/boxicons.min.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}">
+
+  <!-- Template Main CSS File -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- =======================================================
+  * Template Name: Mamba - v4.0.2
+  * Template URL: https://bootstrapmade.com/mamba-one-page-bootstrap-template-free/
+  * Author: BootstrapMade.com
+  * License: https://bootstrapmade.com/license/
+  ======================================================== -->
+</head>
+
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="d-flex align-items-center">
+    <div class="container d-flex align-items-center">
+
+      <div class="logo me-auto">
+        <h1><a href="{{ url_for('home') }}">Beer Recommendation</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+      </div>
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{{ url_for('home') }}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('home') }}#about">About the Project</a></li>
+          <li><a class="nav-link scrollto" href="{{ url_for('home') }}#services">All about Beer (EDA)</a></li>
+          <li class="dropdown"><a href="{{ url_for('home') }}#portfolio"><span>Beer Recommendation</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="{{ url_for('recommend_a') }}">Based on Similarity</a></li>
+              <li><a href="{{ url_for('recommend_b') }}">Based on Personal Ratings</a></li>
+            </ul>
+          </li>
+          <li><a class="nav-link scrollto" href="{{ url_for('home') }}#team">Team</a></li>
+
+          <!-- <li><a class="nav-link scrollto" href="#contact">Contact</a></li> -->
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <main id="main">
+
+    <!-- ======= Breadcrumbs Section ======= -->
+    <section class="breadcrumbs">
+      <div class="container">
+
+        <div class="d-flex justify-content-between align-items-center">
+          <h2>Beer Recommendation Based on Personal Ratings</h2>
+          <ol>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('home') }}#portfolio">Beer Recommendation</a></li>
+            <li>Based on Personal Ratings</li>
+          </ol>
+        </div>
+
+      </div>
+    </section><!-- Breadcrumbs Section -->
+
+    <!-- ======= Portfolio Details Section ======= -->
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container" data-aos="fade-up">
+
+        <div class="row gy-4">
+
+          <div class="col-lg-7">
+            <br><br>
+            <div class="portfolio-details-slider swiper-container">
+              <div class="swiper-wrapper align-items-center">
+
+                <div class="swiper-slide">
+                  <img src="static/img/recommendation/recommendation-b.jpg" alt="">
+                </div>
+
+                <!-- <div class="swiper-slide">
+                  <img src="static/img/portfolio/portfolio-2.jpg" alt="">
+                </div> -->
+
+                <!-- <div class="swiper-slide">
+                  <img src="assets/img/portfolio/portfolio-3.jpg" alt="">
+                </div> -->
+
+              </div>
+              <!-- <div class="swiper-pagination"></div> -->
+            </div>
+          </div>
+
+          <div class="col-lg-5">
+
+            <div class="portfolio-description">
+              <h2>What beer would you like?</h2>
+              <p>
+                This recommendation will be based on <strong>your ratings three beers you choose to rate</strong>. 
+                Please select three beers you know and rate them - ratings can be between 1 to 5.
+              </p>
+            </div>
+
+            <br>
+
+            <div class="portfolio-info">
+              <h3>Select the Options Below.</h3>
+              <form method="POST" action="/recommend_b" role="form", name="petform">
+              <ul class="option-groups">
+                <li>
+                  <label for="user"><strong>Rate Beer Website User Id (Optional)</strong></label><br>
+                  <input id="userid" type="text" placeholder="Optional" name="name">
+                </li>
+                <li>
+                  <label for="beer1"><strong>Beer 1  </strong></label><br>
+                      <select id="select-beer1" name="beer1">
+                          <option selected="">Choose a beer</option>
+                       </select>
+                       <select id="rate-beer1" name="rate1">
+                          <option selected="">Rating</option>
+                       </select>
+                </li>
+
+                <br>
+
+                <li>
+                  <label for="beer2"><strong>Beer 2  </strong></label><br>
+                      <select id="select-beer2" name="beer2">
+                          <option selected="">Choose a beer</option>
+                       </select>
+                       <select id="rate-beer2" name="rate2">
+                          <option selected="">Rating</option>
+                       </select>
+                </li>
+
+                <br>
+
+                <li>
+                  <label for="beer3"><strong>Beer 3  </strong></label><br>
+                      <select id="select-beer3" name="beer3">
+                          <option selected="">Choose a beer</option>
+                       </select>
+                       <select id="rate-beer3" name="rate3">
+                          <option selected="">Rating</option>
+                       </select>
+                </li>
+
+                <br>
+
+                <!-- <li>
+                  <label for="beer4"><strong>Beer 4  </strong></label><br>
+                      <select id="select-beer4" name="beer4">
+                          <option selected="">Choose a beer</option>
+                       </select>
+                       <select id="rate-beer4" name="rate4">
+                          <option selected="">Rating</option>
+                       </select>
+                </li>
+
+                <br>
+
+                <li>
+                  <label for="beer5"><strong>Beer 5  </strong></label><br>
+                      <select id="select-beer5" name="beer5">
+                          <option selected="">Choose a beer</option>
+                       </select>
+                       <select id="rate-beer5" name="rate5">
+                          <option selected="">Rating</option>
+                       </select>
+                </li> -->
+
+            
+              </ul>
+            </div>
+
+            <br>
+
+            <div class="text-center">
+              <!-- <input id="buttonA" type="submit" class="btn btn-outline-primary" href="#" role="button">Find me good beers!</a> -->
+              <input id="buttonB" type="submit" class="btn btn-outline-primary" value="Find me good beers!">
+            </div>
+
+          </form>
+            <!-- <a class="btn btn-outline-primary" href="/scrape" role="button">Scrape New Data</a> -->
+
+          </div>
+
+      </div>
+    </section><!-- End Portfolio Details Section -->
+    
+    <!-- ======= Beer Recommendation Section ======= -->
+    <section id="portfolio" class="portfolio section-bg">
+      <div class="container" data-aos="fade-up" data-aos-delay="100">
+        <div class="section-title">
+          <h2>Your Beer Recommendation</h2>
+          <p>Whether you like the brand or you like the specs, we've got you covered! Check out your beer recommendation below based on your ratings on a few beers: </p>
+        </div>
+        <div class="row portfolio-container">
+          <div class="col-lg-4 col-md-4 portfolio-item text-center">
+            <h4>{{beer_result.beer_name[0]}}</h4>
+            <div class="portfolio-wrap">              
+              <img src="static/img/beer/{{beer_result.beer_name[0]}}.jpg" height=95 class="img-fluid" alt="sorry! no picture collected yet">
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 portfolio-item text-center">
+            <h4>{{beer_result.beer_name[1]}}</h4>            
+            <div class="portfolio-wrap">
+              <img src="static/img/beer/{{beer_result.beer_name[1]}}.jpg" height="100" class="img-fluid" alt="sorry! no picture collected yet">
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4 portfolio-item text-center">
+            <h4>{{beer_result.beer_name[2]}}</h4>
+            <div class="portfolio-wrap">
+              <img src="static/img/beer/{{beer_result.beer_name[2]}}.jpg" height="100" class="img-fluid" alt="sorry! no picture collected yet">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section><!-- End Our Beer Recommendation Section -->
+  </main><!-- End #main -->
+
+
+  <!-- ======= Footer ======= -->
+  <footer id="footer">
+    <div class="container">
+      <div class="copyright">
+        &copy; Copyright <strong><span>Team Awesome @2020</span></strong>. All Rights Reserved
+      </div>
+      <div class="credits">
+        <!-- All the links in the footer should remain intact. -->
+        <!-- You can delete the links only if you purchased the pro version. -->
+        <!-- Licensing information: https://bootstrapmade.com/license/ -->
+        <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/mamba-one-page-bootstrap-template-free/ -->
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+
+  <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/isotope-layout/isotope.pkgd.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/purecounter/purecounter.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+  <!-- Template Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+</body>
+
+</html>
